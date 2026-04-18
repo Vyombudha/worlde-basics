@@ -17234,6 +17234,37 @@ function handleInput(e){
 
 }
 
+
+function resetBoard(){
+    
+    
+    letters.forEach((key) => {
+        key.classList.remove('correct' , 'wrong'); 
+    })
+
+    rows.forEach((row) => {
+        let tiles = Array.from(row.querySelectorAll('p'));
+        tiles.forEach(tile => {
+            tile.innerText = '';
+            tile.classList.remove("correct", "exists", 'wrong', 'flip');
+        })
+
+    })
+
+    currentRowIndex = 0;
+    currentTileIndex = 0;
+    isAnimating = false;
+    gameOver = false;
+ 
+    let popUp = document.querySelector('.popup')
+    popUp.querySelector("p").innerText = 'Game Over';
+    popUp.classList.add('hidden');
+
+
+    document.activeElement.blur()  // releases focus back to document
+
+}
+
 let  rows = document.querySelectorAll(".row");
 
 let letters = document.querySelectorAll(".letters p");
@@ -17274,25 +17305,7 @@ function getValidAnswer(){
 
 // reset only tiles and keep validAnswer same
 resetTilesBtn.addEventListener("click" , () => {
-     
-    rows.forEach((row) => {
-        let tiles = Array.from(row.querySelectorAll('p'));
-        tiles.forEach(tile => {
-            tile.innerText = '';
-            tile.classList.remove("correct", "exists", 'wrong', 'flip');
-        })
-
-    })
-
-    currentRowIndex = 0;
-    currentTileIndex = 0;
-    isAnimating = false;
-    gameOver = false;
- 
-    let popUp = document.querySelector('.popup')
-    popUp.querySelector("p").innerText = 'Game Over';
-    popUp.classList.add('hidden');
-    document.activeElement.blur()  // releases focus back to document
+    resetBoard();
 })
 
 
@@ -17300,25 +17313,7 @@ resetTilesBtn.addEventListener("click" , () => {
 // reset game
 nextGameBtn.addEventListener('click' , () =>{    
     correctGuess = getValidAnswer();
-    
-    rows.forEach((row) => {
-        let tiles = Array.from(row.querySelectorAll('p'));
-        tiles.forEach(tile => {
-            tile.innerText = '';
-            tile.classList.remove("correct", "exists", 'wrong', 'flip');
-        })
-
-    })
-
-    currentRowIndex = 0;
-    currentTileIndex = 0;
-    isAnimating = false;
-    gameOver = false;
-
-    let popUp = document.querySelector('.popup')
-    popUp.querySelector("p").innerText = 'Game Over';
-    popUp.classList.add('hidden');
-    document.activeElement.blur()  // releases focus back to document
+    resetBoard();
 });
 
 
@@ -17329,17 +17324,18 @@ document.addEventListener("keydown" , (e) => {
 });
 
 
+
 function checkAnswer(userGuess){
 
 
     isAnimating = true;
 
+    let matchesArr = new Array(5).fill(null);
 
     let tiles = rows[currentRowIndex].querySelectorAll("p");
      
     let answerArr = correctGuess.split("");
-    let matchesArr = new Array(5).fill(null);
-
+    
     if(!VALID_WORDS.has(userGuess.join(""))){
         // invalid word , shaking the tile
         rows[currentRowIndex].classList.add('shake');
@@ -17380,8 +17376,10 @@ function checkAnswer(userGuess){
             matchesArr[i] = 'wrong';
         }
     }
+
+
     
-    // reload DOM 
+    // reload DOM  for tiles
     tiles.forEach((tile,i) => {
 
         setTimeout(() => {
@@ -17398,6 +17396,28 @@ function checkAnswer(userGuess){
     setTimeout(() => {
         isAnimating = false;
     }, 5 * 300 + 600)
+
+    // reload the DOM for keyboard
+
+    let keys = document.querySelectorAll(".letters p");
+    keys.forEach((key) => {
+
+        if(key.classList.contains("correct")) return;
+
+        let letter = key.innerText || key.dataset.key;
+    
+        userGuess.forEach((guessLetter, i) => {
+            
+            if(guessLetter === letter){
+                if(matchesArr[i] === 'correct' || matchesArr[i] === 'exists' ){
+                    key.classList.add('correct');
+                }
+                else{
+                    key.classList.add('wrong');
+                }
+            }
+        })
+    })
 
     // check if it was rightAnswer or not
     for(let i = 0 ; i < 5; i++){
