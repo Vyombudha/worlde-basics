@@ -2,104 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Wordle</title>
     <link rel="stylesheet" href="wordle.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="popup hidden">
-    <p>Game Over</p>
+        <p class="popup-answer"></p>
+        <p class="popup-msg">Game Over</p>
     </div>
 
-    <div class="container">
-        <div class="rows">
-
-            <div class="row">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-            </div>
-
-            <div class="row">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-            </div>
-
-            <div class="row">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-            </div>
-
-            <div class="row">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-            </div>
-
-            <div class="row">
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-            </div>
-
-        </div>
+    <header>
         <div class="gameControls">
-            <img src="./next_plan_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="next game icon"  class="nextGame"/>
-            <img src="./refresh_26dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="reset Tiles icon" class="resetTiles"/>
+            <button class="resetTiles" title="Reset board">↺</button>
+            <button class="nextGame" title="New word">⇥</button>
+        </div>
+        <h1>WORDLE</h1>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main>
+        <div class="rows">
+            <div class="row"><p></p><p></p><p></p><p></p><p></p></div>
+            <div class="row"><p></p><p></p><p></p><p></p><p></p></div>
+            <div class="row"><p></p><p></p><p></p><p></p><p></p></div>
+            <div class="row"><p></p><p></p><p></p><p></p><p></p></div>
+            <div class="row"><p></p><p></p><p></p><p></p><p></p></div>
         </div>
 
         <div class="keys">
             <div class="letters">
-                <p>Q</p>
-                <p>W</p>
-                <p>E</p>
-                <p>R</p>
-                <p>T</p>
-                <p>Y</p>
-                <p>U</p>
-                <p>I</p>
-                <p>O</p>
-                <p>P</p>
+                <p>Q</p><p>W</p><p>E</p><p>R</p><p>T</p>
+                <p>Y</p><p>U</p><p>I</p><p>O</p><p>P</p>
             </div>
             <div class="letters">
-                <p>A</p>
-                <p>S</p>
-                <p>D</p>
-                <p>F</p>
-                <p>G</p>
-                <p>H</p>
-                <p>J</p>
-                <p>K</p>
-                <p>L</p>
+                <p>A</p><p>S</p><p>D</p><p>F</p><p>G</p>
+                <p>H</p><p>J</p><p>K</p><p>L</p>
             </div>
             <div class="letters">
-                <p>ENTER</p>
-                <p>Z</p>
-                <p>X</p>
-                <p>C</p>
-                <p>V</p>
-                <p>B</p>
-                <p>N</p>
-                <p>M</p>
-                <p data-key="Backspace"><img src="./backspace_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" /></p>
+                <p class="key-wide">ENTER</p>
+                <p>Z</p><p>X</p><p>C</p><p>V</p>
+                <p>B</p><p>N</p><p>M</p>
+                <p class="key-wide" data-key="Backspace">⌫</p>
             </div>
-
         </div>
-    </div>
+    </main>
+
     <script src="wordle.js"></script>
 </body>
 </html>
