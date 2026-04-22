@@ -17222,9 +17222,8 @@ function handleInput(e){
             gameOver = true;
             setTimeout(() => {
                 const popup = document.querySelector('.popup');
-                popup.querySelector('.popup-answer').innerText = correctGuess;
+                popup.querySelector('p').innerText = correctGuess;
                 popup.classList.remove('hidden');
-                setTimeout(() => popup.querySelector('.popup-answer').innerText = "", 1000);
         }, 1500);
         }
          
