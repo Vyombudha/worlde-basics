@@ -23,6 +23,7 @@
     /* responsive tile size: 52px on small, up to 68px on desktop */
     --tile: clamp(52px, 11vw, 68px);
     --tile-font: clamp(1.4rem, 5vw, 2rem);
+    --header-font : 1.8rem;
 
     /* responsive key height */
     --key-h: clamp(48px, 8vh, 58px);
@@ -93,6 +94,28 @@ header h1 {
     letter-spacing: 0.25em;
     color: var(--text);
 }
+
+.difficulty-selection { 
+
+    
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.20em;
+    color: var(--text);
+    
+    width: calc(--header-font + 5%);
+
+
+    background-color: var(--bg);
+    border-color: var(--border);
+}
+
+.difficulty-selection:hover{
+    border-color: var(--key-h);
+}
+
+
+
 
 .gameControls {
     display: flex;
@@ -205,8 +228,8 @@ p.flip {
 .keys {
     display: flex;
     flex-direction: column;
-    gap: 6px;
     width: 100%;
+    gap: 6px;
     padding-bottom: env(safe-area-inset-bottom, 8px);
 }
 
