@@ -17224,7 +17224,7 @@ function handleInput(e){
                 const popup = document.querySelector('.popup');
                 popup.querySelector('.popup-answer').innerText = correctGuess;
                 popup.classList.remove('hidden');
-                popup.querySelector('.popup-answer').innerText = "";
+                setTimeout(() => popup.querySelector('.popup-answer').innerText = "", 1000);
         }, 1500);
         }
          
