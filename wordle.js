@@ -17214,6 +17214,7 @@ function handleInput(e){
             gameOver = true;
             setTimeout(() => {
                 let popUp = document.querySelector('.popup');
+                popup.querySelector('p').innerText = '';
                 popUp.classList.remove("hidden");
             }, 1500);  // wait for all tiles to finish flipping  
 
