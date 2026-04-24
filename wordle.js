@@ -1,4 +1,4 @@
-const easyWords = [
+const hardWords = [
   "ATONE",
   "IRATE",
   "AROSE",
@@ -1178,7 +1178,7 @@ const easyWords = [
   "ZONAL"
 ];
 
-const hardWords = [
+const easyWords = [
   "AGATE",
   "APTLY",
   "ARENA",
