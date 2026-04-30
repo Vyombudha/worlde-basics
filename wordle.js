@@ -1,4 +1,4 @@
-const hardWords = [
+const easyWords = [
   "ATONE",
   "IRATE",
   "AROSE",
@@ -1178,7 +1178,7 @@ const hardWords = [
   "ZONAL"
 ];
 
-const easyWords = [
+const hardWords = [
   "AGATE",
   "APTLY",
   "ARENA",
@@ -2318,10 +2318,6 @@ const easyWords = [
   "FUZZY",
   "JAZZY"
 ];
-
-const EASY = 0,HARD=1;
-let curr_difficulty = EASY;
-let VALID_ANSWERS = easyWords;
 
 const VALID_WORDS = new Set([
 "AAHED",
@@ -17180,7 +17176,19 @@ const VALID_WORDS = new Set([
 "ZYMIC",
 ]);
 
+const EASY = 0,HARD=1;
+let curr_difficulty = EASY;
+let VALID_ANSWERS = easyWords;
 
+
+
+
+/**
+ * Handles the Input from keyboard presses. 
+ * For valid moves, it computes the letters.
+ * Else, it returns preemptively
+ * @param {Event} e  The Event for Keyboard Press in JS 
+ */
 function handleInput(e){
     if(isAnimating || gameOver) return;
     
@@ -17225,7 +17233,7 @@ function handleInput(e){
                 const popup = document.querySelector('.popup');
                 popup.querySelector('p').innerText = correctGuess;
                 popup.classList.remove('hidden');
-        }, 1500);
+              }, 1500);
         }
          
         currentRowIndex++;
@@ -17240,7 +17248,9 @@ function handleInput(e){
 
 }
 
-
+/**
+ * Resets the Play Board of the HTML page
+ */
 function resetBoard(){
     
     
@@ -17307,6 +17317,11 @@ selectionBtn.addEventListener("change" , (e) => {
   console.log(`Diffculty changed to ${new_difficulty}`);
 });
 
+/**
+ * Changes the VALID_ANSWERS to hardWords List or easyWords List based Value of new_difficulty 
+ * @param {number} new_difficulty 
+ * 
+ */
 function changeDifficulty(new_difficulty){
   if(new_difficulty === EASY){
     curr_difficulty = EASY;
@@ -17316,6 +17331,7 @@ function changeDifficulty(new_difficulty){
     curr_difficulty = HARD;
     VALID_ANSWERS = hardWords;
   }
+  correctGuess = getValidAnswer(); 
   resetBoard();
 }
 
@@ -17324,12 +17340,14 @@ function changeDifficulty(new_difficulty){
 let nextGameBtn = document.querySelector(".nextGame");
 let resetTilesBtn = document.querySelector(".resetTiles");
 
-
+/**
+ * Returns a randomly selected string from the VALID_ANSWERS List
+ * @returns {string} 
+ */
 function getValidAnswer(){
     return VALID_ANSWERS[Math.floor(Math.random() * VALID_ANSWERS.length)];
 }
 
-// reset only tiles and keep validAnswer same
 resetTilesBtn.addEventListener("click" , () => {
     resetBoard();
 })
@@ -17350,7 +17368,11 @@ document.addEventListener("keydown" , (e) => {
 });
 
 
-
+/**
+ * Takes the userGuess as Argument, and calculates for the winning condition
+ * @param {string[]} userGuess 
+*  @returns {{winner : boolean , nextTile : boolean}} 
+ */
 function checkAnswer(userGuess){
 
 
